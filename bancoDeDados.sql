@@ -38,10 +38,11 @@ CREATE TABLE AlunoDisciplina
  semestre int not null,
  nota1 float,
  nota2 float,
+ provaSubstitutiva float,
+ media float,
  quantidadeFaltas int,
  frequencia float,
- media float,
- provaSubstitutiva float,
+ situacao varchar(30),
 
  CONSTRAINT pkalunodisciplina PRIMARY KEY (cpfAluno, codDisciplina, ano, semestre),
  CONSTRAINT fkaluno FOREIGN KEY (cpfAluno) references Aluno(cpf),
@@ -61,23 +62,20 @@ INSERT INTO Disciplina VALUES
 (222, 'Estrutura de dados', 80),
 (333, 'Orientacao a objeto', 160);
 
-INSERT INTO AlunoDisciplina VALUES ('52183506059', 111, 2024, 1, 7.5, 8.0, 2, 80, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('95781206051', 111, 2024, 1, 6.0, 7.0, 3, 70, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('74753303039', 111, 2024, 1, 8.0, 9.0, 0, 100, NULL, NULL);
-
-INSERT INTO AlunoDisciplina VALUES ('17520311058', 222, 2024, 1, 7.0, 8.0, 1, 90, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('71221470027', 222, 2024, 1, 8.0, 9.0, 2, 80, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('52183506059', 222, 2024, 1, 6.0, 7.0, 0, 100, NULL, NULL);
-
-INSERT INTO AlunoDisciplina VALUES ('95781206051', 333, 2024, 1, 8.0, 9.0, 3, 70, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('74753303039', 333, 2024, 1, 9.0, 4.0, 1, 90, NULL, NULL);
-INSERT INTO AlunoDisciplina VALUES ('17520311058', 333, 2024, 1, 7.0, 8.0, 2, 80, NULL, NULL);
-
-INSERT INTO AlunoDisciplina VALUES ('52183506059', 333, 2024, 1, 7.0, NULL, 2, 80, NULL, NULL);
-
+INSERT INTO AlunoDisciplina (cpfAluno, codDisciplina, ano, semestre, nota1, nota2, quantidadeFaltas, provaSubstitutiva) VALUES 
+('52183506059', 111, 2024, 1, 7.5, 8.0, 2, NULL),
+('95781206051', 111, 2024, 1, 6.0, 7.0, 3, 1.0),
+('74753303039', 111, 2024, 1, 8.0, 9.0, 0, 3.0),
+('71221470027', 222, 2024, 1, 8.0, 9.0, 9, NULL),
+('52183506059', 222, 2024, 1, 6.0, 7.0, 30, 9.0),
+('95781206051', 333, 2024, 1, 8.0, 9.0, 3, NULL),
+('74753303039', 333, 2024, 1, 5.0, 4.0, 1, 7.0),
+('17520311058', 333, 2024, 1, 7.0, 8.0, 20, NULL),
+('17520311058', 222, 2024, 1, 3.0, NULL, 40, 6.0),
+('52183506059', 333, 2024, 1, 7.0, NULL, 9, 5.0);
 
 GO
-exec Calculo_Media_Parcial
+exec Encerrar_Notas
 
 /*
 select * from Aluno;
